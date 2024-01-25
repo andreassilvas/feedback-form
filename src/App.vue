@@ -1,5 +1,9 @@
 <template>
-    <FeedbackPage />
+  <div class="display-text">
+    <h2>{{ access }}</h2>
+  </div>
+
+  <FeedbackPage />
 </template>
 
 <script>
@@ -9,6 +13,11 @@ export default {
   components: {
     FeedbackPage,
   },
+  data(){
+    return {
+      access: 'Click on the "Feedback" button to access the feedback page. ---->'
+    }
+  }
 };
 </script>
 
@@ -22,21 +31,28 @@ export default {
 }
 
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
   line-height: 1.5;
   font-family: 'Poppins', sans-serif;
   margin: 0;
+  background-color: #fcead7;
 }
 
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   font-size: 16px;
   color: #666666;
-  background-color: #fcead7;
   width: 100%;
 }
 
+.display-text {
+  text-align: center;
+}
 </style>
 
 
