@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { storeFeedbackImages } from '@/imageData.js';
 import FeedbackValidation from '../../UI/validation/FeedbackValidation.vue';
 const VALIDATION_TIMEOUT = 5000;
@@ -55,6 +54,7 @@ const VALIDATION_TIMEOUT = 5000;
 export default {
     components: { FeedbackValidation },
     emits: ['close-feedback'],
+
     data() {
         return {
             feedbackImages: {
@@ -94,31 +94,27 @@ export default {
         },
     },
     methods: {
-        async sendFeedback() {
-            //set inputValidation to true before validation
+        sendFeedback() {
             this.inputValidation = true;
             if (this.isFormValid) {
-                this.dataError = null;
-                const SERVER_URL = 'https://form2024-6dcba-default-rtdb.europe-west1.firebasedatabase.app/dummy-feedback.json';
+    
                 const feedbackPostData = {
                     rating: this.ratingSelected,
                     multiSelect: this.multiSelected,
                     comments: this.textAreaDetails,
                     date: new Date().toDateString()
                 };
-                const headers = {
-                    'Content-Type': 'application/json',
-                };
+                
                 try {
-                    const response = await axios.post(SERVER_URL, feedbackPostData, { headers });
+                    //data are available in the console
+                    console.log(feedbackPostData);
+                    const response = true;
                     // Reset the inputs
                     this.ratingSelected = null;
                     this.multiSelected = [];
                     this.textAreaDetails = '';
                     this.inputValidation = false;
-                    this.feedbackSubmited = response.data
-                        ? this.$t('formValidation.validationMessage.messageSubmited')
-                        : null;
+                    this.feedbackSubmited = response ? this.$t('formValidation.validationMessage.messageSubmited') : null;
                     setTimeout(() => {
                         this.feedbackSubmited = null;
                         this.closeFeedbackPage();
